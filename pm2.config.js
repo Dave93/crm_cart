@@ -2,7 +2,7 @@ require('dotenv').config();
 module.exports = {
   apps: [
     {
-      name: 'crm_cart',
+      name: process.env.PM2_APP_NAME,
       script: './server.js',
       watch: true,
       env: {
