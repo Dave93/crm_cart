@@ -1,5 +1,15 @@
+import dynamic from "next/dynamic";
+
+const DynamicComponentWithNoSSR = dynamic(() => import("../components/App"), {
+  ssr: false,
+});
+
 function HomePage() {
-  return <div>Welcome to Next.js!</div>;
+  return (
+    <div>
+      <DynamicComponentWithNoSSR />
+    </div>
+  );
 }
 
 export default HomePage;
