@@ -29,6 +29,7 @@ function App() {
 
   const loadItems = async () => {
     const urlParams = new URLSearchParams(window.location.search);
+    const dealId = urlParams.get("dealId");
     let project = urlParams.get("project");
 
     if (!project) {
@@ -36,14 +37,14 @@ function App() {
     }
     // if (dev) {
     const { data } = await axios.get(
-      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.categories?project=${project}`
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.categories?project=${project}&dealId=${dealId}`
     );
     if (data.result) {
       setCategories(data.result);
     }
 
     const { data: productsData } = await axios.get(
-      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.list?project=${project}`
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.list?project=${project}&dealId=${dealId}`
     );
     if (productsData.result) {
       setProducts(productsData.result);
