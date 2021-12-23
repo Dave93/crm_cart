@@ -10,10 +10,12 @@ const { publicRuntimeConfig } = getConfig();
 
 const ProductItem = ({ style, product, loadCart }) => {
   const defaultModifiers = [];
-
   if (product.modifiers) {
+    product.modifiers = product.modifiers.filter((mod) => mod !== null);
     const freeModifier = product.modifiers.find((mod) => mod.PRICE == 0);
-    defaultModifiers.push(freeModifier.PRODUCT_ID);
+    if (freeModifier) {
+      defaultModifiers.push(freeModifier.PRODUCT_ID);
+    }
   }
 
   const [chosenModifiers, setChosenModifiers] = useState(defaultModifiers);
@@ -71,10 +73,18 @@ const ProductItem = ({ style, product, loadCart }) => {
     return price;
   }, [product, chosenModifiers]);
 
+  const modifiers = useMemo(() => {
+    let modifiers = [];
+    if (product.modifiers) {
+      modifiers = product.modifiers.filter((mod) => mod !== null);
+    }
+    return modifiers;
+  }, [product]);
+
   return (
     <div style={style}>
       <div className="relative">
-        {product.modifiers ? (
+        {modifiers.length ? (
           <Disclosure>
             {({ open }) => (
               <>
@@ -118,7 +128,7 @@ const ProductItem = ({ style, product, loadCart }) => {
                   >
                     <div>
                       <div className="divide-black divide-opacity-25 divide-y">
-                        {product.modifiers.map((mod) => (
+                        {modifiers.map((mod) => (
                           <div
                             key={mod.ID}
                             className="flex justify-between py-2"
