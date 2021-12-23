@@ -48,7 +48,6 @@ const ProductItem = ({ style, product, loadCart }) => {
       rowData.modifiers = chosenModifiers;
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
     const dealId = urlParams.get("dealId");
     if (dealId) {
       rowData.dealId = dealId;
