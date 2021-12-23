@@ -28,16 +28,22 @@ function App() {
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
 
   const loadItems = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    let project = urlParams.get("project");
+
+    if (!project) {
+      project = "CHOPAR";
+    }
     // if (dev) {
     const { data } = await axios.get(
-      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.categories`
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.categories?project=${project}`
     );
     if (data.result) {
       setCategories(data.result);
     }
 
     const { data: productsData } = await axios.get(
-      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.list`
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.list?project=${project}`
     );
     if (productsData.result) {
       setProducts(productsData.result);
@@ -58,17 +64,21 @@ function App() {
   const loadCart = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const dealId = urlParams.get("dealId");
+    let project = urlParams.get("project");
+
+    if (!project) {
+      project = "CHOPAR";
+    }
 
     if (dealId) {
       const { data } = await axios.get(
-        `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/load.cart?dealId=` +
-          dealId
+        `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/load.cart?dealId=${dealId}&project=${project}`
       );
       setCartItems(data.result.items);
       setCartTotalPrice(data.result.totalPrice);
     } else {
       const { data } = await axios.get(
-        `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/load.cart`
+        `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/load.cart?project=${project}`
       );
       setCartItems(data.result.items);
       setCartTotalPrice(data.result.totalPrice);
@@ -101,13 +111,14 @@ function App() {
   };
 
   const filteredProducts = useMemo(() => {
-    return products.filter(
-      (item) =>
-        item.NAME.toLowerCase().indexOf(searchVal) >= 0 ||
-        item.NAME.toLowerCase().indexOf(ru.fromEn(searchVal)) >= 0 ||
-        (selectedKeys.length &&
-          selectedKeys.indexOf(+item.IBLOCK_SECTION_ID) >= 0)
-    );
+    return products.filter((item) => {
+      return (
+        (searchVal.length && item.NAME.toLowerCase().indexOf(searchVal) >= 0) ||
+        (searchVal.length &&
+          item.NAME.toLowerCase().indexOf(ru.fromEn(searchVal)) >= 0) ||
+        (selectedKeys.length && selectedKeys.includes(+item.IBLOCK_SECTION_ID))
+      );
+    });
   }, [products, searchVal, selectedKeys]);
 
   const RowItem = ({ index, style }) => (
@@ -129,7 +140,6 @@ function App() {
     loadCart();
     return;
   }, []);
-
   return (
     <div className="p-3 bg-gray-100">
       <Layout className="bg-gray-100">
