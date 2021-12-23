@@ -87,22 +87,28 @@ function App() {
   };
 
   const increaseBasketItem = async (id) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    let project = urlParams.get("project");
     const { data } = await axios.get(
-      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/increase.basket.item?rowId=${id}&quantity=1`
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/increase.basket.item?rowId=${id}&quantity=1&project=${project}`
     );
     loadCart();
   };
 
   const decreaseBasketItem = async (id) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    let project = urlParams.get("project");
     const { data } = await axios.get(
-      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/decrease.basket.item?rowId=${id}&quantity=1`
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/decrease.basket.item?rowId=${id}&quantity=1&project=${project}`
     );
     loadCart();
   };
 
   const deleteBasketItem = async (id) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    let project = urlParams.get("project");
     const { data } = await axios.get(
-      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/delete.basket.item?rowId=${id}`
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/delete.basket.item?rowId=${id}&project=${project}`
     );
     loadCart();
   };
