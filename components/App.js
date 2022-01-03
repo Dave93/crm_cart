@@ -279,7 +279,12 @@ function App() {
             />
           </Col>
           <Col span={18}>
-            <AutoSizer>
+            <AutoSizer
+              defaultHeight={500}
+              style={{
+                minHeight: 500,
+              }}
+            >
               {({ height, width }) => (
                 <List
                   height={height}
