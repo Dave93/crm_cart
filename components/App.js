@@ -66,6 +66,7 @@ function App() {
     const urlParams = new URLSearchParams(window.location.search);
     const dealId = urlParams.get("dealId");
     let project = urlParams.get("project");
+    let fuser = urlParams.get("fuser");
 
     if (!project) {
       project = "CHOPAR";
@@ -79,7 +80,7 @@ function App() {
       setCartTotalPrice(data.result.totalPrice);
     } else {
       const { data } = await axios.get(
-        `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/load.cart?project=${project}`
+        `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/load.cart?project=${project}&fuser=${fuser}`
       );
       setCartItems(data.result.items);
       setCartTotalPrice(data.result.totalPrice);

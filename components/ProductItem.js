@@ -41,6 +41,7 @@ const ProductItem = ({ style, product, loadCart }) => {
     setIsAddingCart(true);
     const urlParams = new URLSearchParams(window.location.search);
     let project = urlParams.get("project");
+    let fuser = urlParams.get("fuser");
     const rowData = {
       productId: product.PRODUCT_ID,
     };
@@ -54,6 +55,9 @@ const ProductItem = ({ style, product, loadCart }) => {
     }
     if (project) {
       rowData.project = project;
+    }
+    if (fuser) {
+      rowData.fuser = fuser;
     }
     const { data } = await axios.post(
       `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/add.deal.basket.item`,
