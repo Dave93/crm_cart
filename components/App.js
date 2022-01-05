@@ -74,7 +74,7 @@ function App() {
 
     if (dealId) {
       const { data } = await axios.get(
-        `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/load.cart?dealId=${dealId}&project=${project}`
+        `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/load.cart?dealId=${dealId}&project=${project}&fuser=${fuser}`
       );
       setCartItems(data.result.items);
       setCartTotalPrice(data.result.totalPrice);
