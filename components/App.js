@@ -8,6 +8,7 @@ import currency from "currency.js";
 import { MinusOutlined, PlusOutlined, CloseOutlined } from "@ant-design/icons";
 const ru = require("convert-layout/ru");
 import getConfig from "next/config";
+import translit from "latin-to-cyrillic";
 
 const { Search } = Input;
 const { hostname } = window.location;
@@ -29,7 +30,7 @@ function App() {
 
   const loadItems = async () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const dealId = urlParams.get("dealId");
+    const dealId = urlParams.get("dealId") ?? 0;
     let project = urlParams.get("project");
 
     if (!project) {
@@ -64,9 +65,9 @@ function App() {
 
   const loadCart = async () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const dealId = urlParams.get("dealId");
+    const dealId = urlParams.get("dealId") ?? 0;
     let project = urlParams.get("project");
-    let fuser = urlParams.get("fuser");
+    let fuser = urlParams.get("fuser") ?? 0;
 
     if (!project) {
       project = "CHOPAR";
@@ -122,6 +123,8 @@ function App() {
     return products.filter((item) => {
       return (
         (searchVal.length && item.NAME.toLowerCase().indexOf(searchVal) >= 0) ||
+        (searchVal.length &&
+          item.NAME.toLowerCase().indexOf(translit(searchVal)) >= 0) ||
         (searchVal.length &&
           item.NAME.toLowerCase().indexOf(ru.fromEn(searchVal)) >= 0) ||
         (selectedKeys.length && selectedKeys.includes(+item.IBLOCK_SECTION_ID))

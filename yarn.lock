@@ -1767,6 +1767,11 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
+latin-to-cyrillic@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/latin-to-cyrillic/-/latin-to-cyrillic-1.0.1.tgz#4a057f58c2aaa9b2d534428c0b71b79a319bb804"
+  integrity sha1-SgV/WMKqqbLVNEKMC3G3mjGbuAQ=
+
 lilconfig@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.0.3.tgz#68f3005e921dafbd2a2afb48379986aa6d2579fd"
