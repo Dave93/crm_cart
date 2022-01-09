@@ -30,10 +30,10 @@ const ProductItem = ({ style, product, loadCart }) => {
       mods.push(modId);
     }
 
-    if (mods.length == 0) {
-      const freeModifier = product.modifiers.find((mod) => mod.PRICE == 0);
-      mods.push(freeModifier.PRODUCT_ID);
-    }
+    // if (mods.length == 0) {
+    //   const freeModifier = product.modifiers.find((mod) => mod.PRICE == 0);
+    //   mods.push(freeModifier.PRODUCT_ID);
+    // }
     setChosenModifiers(mods);
   };
 
@@ -149,7 +149,7 @@ const ProductItem = ({ style, product, loadCart }) => {
                               className={`${
                                 chosenModifiers.indexOf(mod.PRODUCT_ID) >= 0
                                   ? "bg-blue-500"
-                                  : "bg-blue-300"
+                                  : "bg-red-500"
                               } relative inline-flex items-center h-6 rounded-full w-11`}
                             >
                               <span className="sr-only">Use setting</span>

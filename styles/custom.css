@@ -3,6 +3,16 @@ button,
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
-  background-color: #1890ff;
   background-image: none;
+}
+
+.ant-input-search
+  > .ant-input-group
+  > .ant-input-group-addon:last-child
+  .ant-input-search-button {
+  background-color: #1890ff;
+}
+
+.ant-btn-circle.ant-btn-sm.ant-btn-primary {
+  background-color: #1890ff;
 }
