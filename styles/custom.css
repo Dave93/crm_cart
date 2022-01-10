@@ -13,6 +13,6 @@ button,
   background-color: #1890ff;
 }
 
-.ant-btn-circle.ant-btn-sm.ant-btn-primary {
+.ant-btn-circle.ant-btn-sm.ant-btn-primary:not(.ant-btn-dangerous) {
   background-color: #1890ff;
 }

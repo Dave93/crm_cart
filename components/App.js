@@ -27,6 +27,8 @@ function App() {
   const [selectedKeys, setSelectedKeys] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
+  const urlParams = new URLSearchParams(window.location.search);
+  let dealId = urlParams.get("dealId") ?? 0;
 
   const loadItems = async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -142,6 +144,49 @@ function App() {
 
   const onSearch = (value) => setSearchVal(value);
 
+  const removeModifier = async (item, mod) => {
+    let modifiers = item.UF_MOFIDIERS;
+    let activeModifiers = [];
+
+    let existingModifier = modifiers.find((findMod) => findMod.ID == mod.ID);
+    if (existingModifier) {
+      activeModifiers = [
+        ...modifiers
+          .filter((findMod) => findMod.ID != mod.ID)
+          .map((findMod) => findMod.ID),
+      ];
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let project = urlParams.get("project");
+    let fuser = urlParams.get("fuser");
+    const { data } = await axios.get(
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/delete.basket.item?rowId=${item.ID}&project=${project}`
+    );
+
+    const rowData = {
+      productId: item.UF_PRODUCT_ID,
+    };
+    rowData.modifiers = activeModifiers;
+
+    const dealId = urlParams.get("dealId");
+    if (dealId) {
+      rowData.dealId = dealId;
+    }
+    if (project) {
+      rowData.project = project;
+    }
+    if (fuser) {
+      rowData.fuser = fuser;
+    }
+    await axios.post(
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/add.deal.basket.item`,
+      rowData
+    );
+
+    loadCart();
+  };
+
   const onChange = (e) => {
     setSearchVal(e.target.value);
   };
@@ -174,9 +219,20 @@ function App() {
                           {item.UF_MOFIDIERS.map((mod) => (
                             <div
                               key={mod.ID}
-                              className="text-[10px] inline-flex items-center font-bold leading-sm uppercase px-3 py-1 mx-1 bg-blue-200 text-blue-700 rounded-full"
+                              className=" text-[10px] inline-flex items-center font-bold leading-sm uppercase px-3 py-1 mx-1 bg-blue-200 text-blue-700 rounded-full"
                             >
                               {mod.NAME}
+                              {!dealId && (
+                                <Button
+                                  type="primary"
+                                  shape="circle"
+                                  size="small"
+                                  danger
+                                  icon={<CloseOutlined />}
+                                  className="ml-2"
+                                  onClick={() => removeModifier(item, mod)}
+                                />
+                              )}
                             </div>
                           ))}
                         </div>
