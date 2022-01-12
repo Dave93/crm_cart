@@ -34,6 +34,7 @@ function App() {
     const urlParams = new URLSearchParams(window.location.search);
     const dealId = urlParams.get("dealId") ?? 0;
     let project = urlParams.get("project");
+    let terminal = urlParams.get("terminal");
 
     if (!project) {
       project = "CHOPAR";
@@ -47,7 +48,7 @@ function App() {
     }
 
     const { data: productsData } = await axios.get(
-      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.list?project=${project}&dealId=${dealId}`
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.list?project=${project}&dealId=${dealId}&terminal=${terminal}`
     );
     if (productsData.result) {
       setProducts(productsData.result);
