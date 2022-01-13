@@ -281,7 +281,7 @@ const ProductItem = ({ style, product, loadCart }) => {
             </div>
             {!product.AVAILABLE && (
               <div className="bg-red-100 px-3 py-3 rounded-md text-red-700 text-center absolute top-0 w-full h-full text-xl font-bold bg-opacity-50 flex items-center justify-around">
-                Товар недоступен
+                Товара нет в наличии (стоп-лист)
               </div>
             )}
           </div>
