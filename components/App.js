@@ -48,7 +48,11 @@ function App() {
     }
 
     const { data: productsData } = await axios.get(
-      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.list?project=${project}&dealId=${dealId}&terminal=${terminal}`
+      `https://${
+        publicRuntimeConfig.crmUrl
+      }/rest/1/63dif6icpi61ci3f/get.product.list?project=${project}&dealId=${dealId}${
+        terminal ? "&terminal=" + terminal : ""
+      }`
     );
     if (productsData.result) {
       setProducts(productsData.result);
