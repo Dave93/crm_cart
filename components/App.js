@@ -85,6 +85,7 @@ function App() {
     if (!project) {
       project = "CHOPAR";
     }
+    console.log("related items");
     const { data: productsData } = await axios.get(
       `https://${
         publicRuntimeConfig.crmUrl
