@@ -106,12 +106,11 @@ function App() {
         }
       });
       setCartItems(newCartItems);
-      console.log(newCartItems);
     }
     const { data } = await axios.get(
       `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/increase.basket.item?rowId=${id}&quantity=1&project=${project}`
     );
-    loadCart();
+    // loadCart();
   };
 
   const decreaseBasketItem = async (id) => {
@@ -126,12 +125,11 @@ function App() {
         }
       });
       setCartItems(newCartItems);
-      console.log(newCartItems);
     }
     const { data } = await axios.get(
       `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/decrease.basket.item?rowId=${id}&quantity=1&project=${project}`
     );
-    loadCart();
+    // loadCart();
   };
 
   const deleteBasketItem = async (id) => {
