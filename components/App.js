@@ -102,7 +102,7 @@ function App() {
     if (newCartItems.length) {
       newCartItems.forEach((item) => {
         if (item.ID == id) {
-          item.count++;
+          +item.UF_QUANTITY++;
         }
       });
       setCartItems(newCartItems);
@@ -122,7 +122,7 @@ function App() {
     if (newCartItems.length) {
       newCartItems.forEach((item) => {
         if (item.ID == id && +item.UF_QUANTITY > 1) {
-          item.count--;
+          +item.UF_QUANTITY--;
         }
       });
       setCartItems(newCartItems);
