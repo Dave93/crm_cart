@@ -98,6 +98,13 @@ function App() {
   const increaseBasketItem = async (id) => {
     const urlParams = new URLSearchParams(window.location.search);
     let project = urlParams.get("project");
+    let cartItems = [...cartItems];
+    cartItems.forEach((item) => {
+      if (item.ID == id) {
+        item.count++;
+      }
+    });
+    setCartItems(cartItems);
     const { data } = await axios.get(
       `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/increase.basket.item?rowId=${id}&quantity=1&project=${project}`
     );
@@ -107,6 +114,12 @@ function App() {
   const decreaseBasketItem = async (id) => {
     const urlParams = new URLSearchParams(window.location.search);
     let project = urlParams.get("project");
+    cartItems.forEach((item) => {
+      if (item.ID == id && +item.UF_QUANTITY > 1) {
+        item.count--;
+      }
+    });
+    setCartItems(cartItems);
     const { data } = await axios.get(
       `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/decrease.basket.item?rowId=${id}&quantity=1&project=${project}`
     );
