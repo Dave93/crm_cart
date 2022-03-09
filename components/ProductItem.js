@@ -8,7 +8,7 @@ import getConfig from "next/config";
 
 const { publicRuntimeConfig } = getConfig();
 
-const ProductItem = ({ style, product, loadCart }) => {
+const ProductItem = ({ style, product, loadCart, loadRelatedItems }) => {
   const defaultModifiers = [];
   if (product.modifiers) {
     product.modifiers = product.modifiers.filter((mod) => mod !== null);
@@ -67,6 +67,7 @@ const ProductItem = ({ style, product, loadCart }) => {
     setIsAddingCart(false);
 
     loadCart();
+    loadRelatedItems();
   };
 
   const totalPrice = useMemo(() => {

@@ -5,7 +5,12 @@ import { FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import ProductItem from "./ProductItem";
 import currency from "currency.js";
-import { MinusOutlined, PlusOutlined, CloseOutlined } from "@ant-design/icons";
+import {
+  MinusOutlined,
+  PlusOutlined,
+  CloseOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
 const ru = require("convert-layout/ru");
 import getConfig from "next/config";
 import translit from "latin-to-cyrillic";
@@ -26,6 +31,7 @@ function App() {
   const [searchVal, setSearchVal] = useState("");
   const [selectedKeys, setSelectedKeys] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
   const urlParams = new URLSearchParams(window.location.search);
   let dealId = urlParams.get("dealId") ?? 0;
@@ -56,6 +62,38 @@ function App() {
     );
     if (productsData.result) {
       setProducts(productsData.result);
+    }
+    // } else {
+    //   const locPath = window.location.pathname.match(/\/.*\/(\d+)\//);
+    //   const { data } = await axios.get(
+    //     `/ajax/get_transactions.php?orderId=${locPath[1]}`
+    //   );
+    //   console.log(data);
+
+    //   if (data.data) {
+    //     setItems(data.data);
+    //   }
+    // }
+  };
+
+  const loadRelatedItems = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const dealId = urlParams.get("dealId") ?? 0;
+    let project = urlParams.get("project");
+    let terminal = urlParams.get("terminal");
+
+    if (!project) {
+      project = "CHOPAR";
+    }
+    const { data: productsData } = await axios.get(
+      `https://${
+        publicRuntimeConfig.crmUrl
+      }/rest/1/63dif6icpi61ci3f/load.related.items?project=${project}&dealId=${dealId}${
+        terminal ? "&terminal=" + terminal : ""
+      }`
+    );
+    if (productsData.result) {
+      setRelatedProducts(productsData.result);
     }
     // } else {
     //   const locPath = window.location.pathname.match(/\/.*\/(\d+)\//);
@@ -139,6 +177,7 @@ function App() {
       `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/delete.basket.item?rowId=${id}&project=${project}`
     );
     loadCart();
+    loadRelatedItems();
   };
 
   const onTreeSelect = (selectedKeys) => {
@@ -163,6 +202,7 @@ function App() {
       style={style}
       product={filteredProducts[index]}
       loadCart={loadCart}
+      loadRelatedItems={loadRelatedItems}
     />
   );
 
@@ -211,6 +251,33 @@ function App() {
     loadCart();
   };
 
+  const addToCart = async (productId) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    let project = urlParams.get("project");
+    let fuser = urlParams.get("fuser");
+    const rowData = {
+      productId,
+    };
+
+    const dealId = urlParams.get("dealId");
+    if (dealId) {
+      rowData.dealId = dealId;
+    }
+    if (project) {
+      rowData.project = project;
+    }
+    if (fuser) {
+      rowData.fuser = fuser;
+    }
+    const { data } = await axios.post(
+      `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/add.deal.basket.item`,
+      rowData
+    );
+
+    loadCart();
+    loadRelatedItems();
+  };
+
   const onChange = (e) => {
     setSearchVal(e.target.value);
   };
@@ -218,6 +285,7 @@ function App() {
   useEffect(() => {
     loadItems();
     loadCart();
+    loadRelatedItems();
     return;
   }, []);
   return (
@@ -336,6 +404,32 @@ function App() {
               </h4>
             </div>
           )}
+        </div>
+        <div className="py-2">
+          <h3 className="font-bold uppercase text-xl pb-3">
+            Рекомендуемые товары
+          </h3>
+          <div className="flex space-x-2">
+            {relatedProducts.length > 0 && (
+              <>
+                {relatedProducts.map((item) => (
+                  <span
+                    onClick={() => {
+                      addToCart(item.PRODUCT_ID);
+                    }}
+                    class="px-4 py-2 rounded-full space-x-1 shadow-lg active:shadow-none text-white bg-blue-400 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-blue-500 transition duration-300 ease items-center"
+                  >
+                    <span className="block">{item.NAME}</span>
+                    <PlusCircleOutlined
+                      style={{
+                        fontSize: "20px",
+                      }}
+                    />
+                  </span>
+                ))}
+              </>
+            )}
+          </div>
         </div>
         <h3 className="font-bold uppercase text-xl pb-3">
           Добавить товары в корзину
