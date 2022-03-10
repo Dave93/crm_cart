@@ -3142,6 +3142,16 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
+tree-flatten@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/tree-flatten/-/tree-flatten-1.0.0.tgz#b5d4096c62775bceac8489937cfbe20dec756b5d"
+  integrity sha1-tdQJbGJ3W86shImTfPviDex1a10=
+
+tree-util@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/tree-util/-/tree-util-1.0.6.tgz#44256034de6a6eb8855971881343a242ce0c7dff"
+  integrity sha512-0N+P/6DgdQIYCfgHtwgFRq3IchsJpmOnFQMz6U6/CkV4GuTgYEyqVEMeV6dKDEoby3JfEh+H6wHbYkmLnYfNCw==
+
 ts-pnp@^1.1.6:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"

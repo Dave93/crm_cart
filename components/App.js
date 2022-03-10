@@ -50,7 +50,7 @@ function App() {
       `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/get.product.categories?project=${project}&dealId=${dealId}`
     );
     if (data.result) {
-      setCategories(data.result);
+      setCategories(data.result.items);
     }
 
     const { data: productsData } = await axios.get(
@@ -292,18 +292,18 @@ function App() {
   return (
     <div className="p-3 bg-gray-100">
       <Layout className="bg-gray-100">
-        <div className="py-5">
+        <div className="py-2">
           <h3 className="font-bold uppercase text-xl pb-3">Товары в корзине</h3>
           {cartItems.length > 0 ? (
             <div>
               <div>
                 {cartItems.map((item) => (
                   <div
-                    className="px-3 py-3 rounded-md border bg-white flex justify-between items-center"
+                    className="px-3 py-1 rounded-md border bg-white flex justify-between items-center"
                     key={item.ID}
                   >
                     <div className="flex-grow">
-                      <div className="font-bold text-lg">
+                      <div className="font-bold text-md">
                         {item.UF_PRODUCT_NAME}
                       </div>
                       {item.UF_MOFIDIERS && (
@@ -418,7 +418,7 @@ function App() {
                     onClick={() => {
                       addToCart(item.PRODUCT_ID);
                     }}
-                    class="px-4 py-2 rounded-full space-x-1 shadow-lg active:shadow-none text-white bg-blue-400 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-blue-500 transition duration-300 ease items-center"
+                    class="px-4 py-2 rounded-full space-x-1 shadow-lg active:shadow-none text-white bg-blue-400 font-semibold text-xs flex align-center w-max cursor-pointer active:bg-blue-500 transition duration-300 ease items-center"
                   >
                     <span className="block">{item.NAME}</span>
                     <PlusCircleOutlined
@@ -448,6 +448,7 @@ function App() {
               treeData={categories}
               key="ID"
               // selectable={true}
+              autoExpandParent={true}
               showLine={true}
               className="p-3"
               titleRender={(item) => <div>{item.NAME}</div>}
