@@ -420,7 +420,7 @@ function App() {
                     onClick={() => {
                       addToCart(item.PRODUCT_ID);
                     }}
-                    class="px-4 py-2 rounded-full space-x-1 shadow-lg active:shadow-none text-white bg-blue-400 font-semibold text-xs flex align-center w-max cursor-pointer active:bg-blue-500 transition duration-300 ease items-center"
+                    class="px-4 rounded-full space-x-1 shadow-lg active:shadow-none text-white bg-blue-400 font-semibold text-xs flex align-center w-max cursor-pointer active:bg-blue-500 transition duration-300 ease items-center"
                   >
                     <span className="block">{item.NAME}</span>
                     <PlusCircleOutlined
