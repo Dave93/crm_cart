@@ -16,3 +16,11 @@ button,
 .ant-btn-circle.ant-btn-sm.ant-btn-primary:not(.ant-btn-dangerous) {
   background-color: #1890ff;
 }
+
+.ant-tree {
+  font-size: 13px;
+}
+
+.ant-tree .ant-tree-treenode {
+  padding: 0;
+}

@@ -32,6 +32,7 @@ function App() {
   const [selectedKeys, setSelectedKeys] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const [expandedKeys, setExpandedKeys] = useState([]);
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
   const urlParams = new URLSearchParams(window.location.search);
   let dealId = urlParams.get("dealId") ?? 0;
@@ -51,6 +52,7 @@ function App() {
     );
     if (data.result) {
       setCategories(data.result.items);
+      setExpandedKeys(data.result.ids);
     }
 
     const { data: productsData } = await axios.get(
@@ -453,8 +455,9 @@ function App() {
               className="p-3"
               titleRender={(item) => <div>{item.NAME}</div>}
               selectedKeys={selectedKeys}
-              // expandedKeys={expanedKeys}
+              expandedKeys={expandedKeys}
               // onExpand={onTreeExpand}
+              defaultExpandAll={true}
               onSelect={onTreeSelect}
             />
           </Col>
