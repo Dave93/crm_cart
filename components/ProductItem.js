@@ -105,7 +105,7 @@ const ProductItem = ({ style, product, loadCart, loadRelatedItems }) => {
                         pattern: "# !",
                         separator: " ",
                         decimal: ".",
-                        symbol: "сўм",
+                        symbol: "",
                         precision: 0,
                       }).format()}
                     </div>
@@ -176,7 +176,7 @@ const ProductItem = ({ style, product, loadCart, loadRelatedItems }) => {
                                 pattern: "# !",
                                 separator: " ",
                                 decimal: ".",
-                                symbol: "сўм",
+                                symbol: "",
                                 precision: 0,
                               }).format()}
                             </div>
@@ -189,7 +189,7 @@ const ProductItem = ({ style, product, loadCart, loadRelatedItems }) => {
                           pattern: "# !",
                           separator: " ",
                           decimal: ".",
-                          symbol: "сўм",
+                          symbol: "",
                           precision: 0,
                         }).format()}
                       </div>
@@ -242,7 +242,7 @@ const ProductItem = ({ style, product, loadCart, loadRelatedItems }) => {
                   pattern: "# !",
                   separator: " ",
                   decimal: ".",
-                  symbol: "сўм",
+                  symbol: "",
                   precision: 0,
                 }).format()}
               </div>
