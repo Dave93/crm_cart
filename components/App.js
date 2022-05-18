@@ -338,7 +338,7 @@ function App() {
                         pattern: "# !",
                         separator: " ",
                         decimal: ".",
-                        symbol: "сўм",
+                        symbol: "",
                         precision: 0,
                       }).format()}
                     </div>
@@ -370,7 +370,7 @@ function App() {
                         pattern: "# !",
                         separator: " ",
                         decimal: ".",
-                        symbol: "сўм",
+                        symbol: "",
                         precision: 0,
                       }).format()}
                     </div>
@@ -395,7 +395,7 @@ function App() {
                   pattern: "# !",
                   separator: " ",
                   decimal: ".",
-                  symbol: "сўм",
+                  symbol: "",
                   precision: 0,
                 }).format()}
               </div>
