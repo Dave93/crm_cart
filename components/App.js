@@ -83,6 +83,7 @@ function App() {
     const dealId = urlParams.get("dealId") ?? 0;
     let project = urlParams.get("project");
     let terminal = urlParams.get("terminal");
+    let fuser = urlParams.get("fuser") ?? 0;
 
     if (!project) {
       project = "CHOPAR";
@@ -93,7 +94,7 @@ function App() {
         publicRuntimeConfig.crmUrl
       }/rest/1/63dif6icpi61ci3f/load.related.items?project=${project}&dealId=${dealId}${
         terminal ? "&terminal=" + terminal : ""
-      }`
+      }&fuser=${fuser}`
     );
     if (productsData.result) {
       setRelatedProducts(productsData.result);
