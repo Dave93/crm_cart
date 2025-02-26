@@ -255,7 +255,7 @@ function App() {
     loadCart();
   };
 
-  const addToCart = async (productId) => {
+  const addToCart = async (productId, additional = false) => {
     const urlParams = new URLSearchParams(window.location.search);
     let project = urlParams.get("project");
     let fuser = urlParams.get("fuser");
@@ -273,6 +273,11 @@ function App() {
     if (fuser) {
       rowData.fuser = fuser;
     }
+
+    if (additional) {
+      rowData.additional = true;
+    }
+
     const { data } = await axios.post(
       `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/add.deal.basket.item`,
       rowData
@@ -419,7 +424,7 @@ function App() {
                 {relatedProducts.map((item) => (
                   <span
                     onClick={() => {
-                      addToCart(item.PRODUCT_ID);
+                      addToCart(item.PRODUCT_ID, true);
                     }}
                     class="px-4 py-1 rounded-full space-x-1 shadow-lg active:shadow-none text-white bg-blue-400 font-semibold text-xs flex align-center w-max cursor-pointer active:bg-blue-500 transition duration-300 ease items-center"
                   >
