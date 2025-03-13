@@ -59,9 +59,15 @@ const ProductItem = ({ style, product, loadCart, loadRelatedItems }) => {
     if (fuser) {
       rowData.fuser = fuser;
     }
+
+    console.log('additional', additional)
+
     if (additional) {
       rowData.additional = true;
     }
+
+    console.log('rowData', rowData)
+
     const { data } = await axios.post(
       `https://${publicRuntimeConfig.crmUrl}/rest/1/63dif6icpi61ci3f/add.deal.basket.item`,
       rowData
