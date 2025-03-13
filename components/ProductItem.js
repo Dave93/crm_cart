@@ -237,7 +237,7 @@ const ProductItem = ({ style, product, loadCart, loadRelatedItems }) => {
                       <div className="flex justify-end mt-2">
                         <button
                           className="bg-blue-400 px-4 py-3 text-white uppercase rounded-md w-48 text-center"
-                          onClick={addToCart}
+                          onClick={() => addToCart(false)}
                           disabled={isAddingCart}
                         >
                           {isAddingCart ? (
@@ -323,7 +323,7 @@ const ProductItem = ({ style, product, loadCart, loadRelatedItems }) => {
                 
                 <button
                   className="bg-blue-400 px-3 py-2 rounded-md uppercase text-white w-48 text-center"
-                  onClick={addToCart}
+                  onClick={() => addToCart(false)}
                   disabled={isAddingCart}
                 >
                   {isAddingCart ? (
