@@ -1,36 +1,37 @@
 {
   "name": "crm_cart",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && next build",
+    "dev": "next dev --turbopack",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.1",
-    "@heroicons/react": "^1.0.4",
-    "antd": "^4.16.13",
-    "axios": "^0.22.0",
-    "bx24": "^0.1.3",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@tanstack/react-query": "^5.60.0",
+    "@tanstack/react-virtual": "^3.10.0",
+    "axios": "^1.7.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
     "convert-layout": "^0.10.0",
     "currency.js": "^2.0.4",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
     "latin-to-cyrillic": "^1.0.1",
-    "next": "11.1.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-virtualized-auto-sizer": "^1.0.6",
-    "react-window": "^1.8.6",
-    "react-window-dynamic-list": "^2.4.2",
-    "tree-flatten": "^1.0.0",
-    "tree-util": "^1.0.6"
+    "lucide-react": "^0.460.0",
+    "next": "^16.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.5.0",
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.1",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.11"
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.7.0"
   }
 }

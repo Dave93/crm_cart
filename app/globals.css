@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Blue Primary - original color */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 214 32% 91%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 60%;
+    --radius: 0.5rem;
+
+    --success: 142 71% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Compact quantity stepper */
+  .qty-stepper {
+    @apply inline-flex items-center bg-secondary rounded-md overflow-hidden;
+  }
+  .qty-stepper button {
+    @apply w-7 h-7 flex items-center justify-center transition-colors text-muted-foreground;
+  }
+  .qty-stepper button:hover {
+    @apply bg-primary/10 text-primary;
+  }
+  .qty-stepper .qty-value {
+    @apply w-8 text-center font-mono font-medium text-sm;
+  }
+
+  /* Price tag style */
+  .price-tag {
+    @apply font-mono font-medium tabular-nums;
+  }
+
+  /* Tree item compact */
+  .tree-item {
+    @apply relative pl-3 py-1 cursor-pointer rounded transition-colors text-sm;
+  }
+  .tree-item:hover {
+    @apply bg-muted;
+  }
+  .tree-item.selected {
+    @apply bg-primary/10 text-primary font-medium;
+  }
+  .tree-item.selected::before {
+    content: '';
+    @apply absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-primary rounded-full;
+  }
+
+  /* Compact search */
+  .search-input {
+    @apply relative;
+  }
+  .search-input input {
+    @apply pl-9 pr-8 h-9 w-full rounded-md border bg-white text-sm;
+    @apply transition-all duration-150;
+    @apply focus:border-primary focus:ring-1 focus:ring-primary/20 focus:outline-none;
+  }
+  .search-input input::placeholder {
+    @apply text-muted-foreground;
+  }
+  .search-input .search-icon {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground;
+  }
+
+  /* Badge modifier compact */
+  .badge-modifier {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium cursor-pointer;
+    @apply bg-primary/10 text-primary border border-primary/20;
+    @apply transition-all duration-150;
+  }
+  .badge-modifier:hover {
+    @apply bg-primary/20;
+  }
+  .badge-modifier.selected {
+    @apply bg-primary text-white border-primary;
+  }
+
+  /* Compact buttons */
+  .btn-add-cart {
+    @apply h-8 px-3 rounded-md text-sm font-medium transition-all duration-150;
+    @apply bg-primary text-white;
+    @apply hover:bg-primary/90;
+    @apply active:scale-95;
+  }
+
+  .btn-modifier {
+    @apply h-8 px-3 rounded-md text-sm font-medium transition-all duration-150;
+    @apply bg-white text-foreground border border-border;
+    @apply hover:border-primary/50 hover:bg-primary/5;
+  }
+
+  /* Compact empty state */
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-6 text-center;
+  }
+  .empty-state-title {
+    @apply text-sm font-medium text-muted-foreground;
+  }
+  .empty-state-text {
+    @apply text-xs text-muted-foreground/70;
+  }
+
+  /* Compact scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  /* Slide in animation */
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-4px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .animate-slide-in {
+    animation: slideIn 0.15s ease-out forwards;
+  }
+}
