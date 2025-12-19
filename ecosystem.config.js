@@ -5,6 +5,7 @@ module.exports = {
       script: 'node_modules/.bin/next',
       args: 'start -p 8082',
       cwd: '/home/davr/chopar/crm_cart',
+      interpreter: '/root/.nvm/versions/node/v20.18.0/bin/node',
       instances: 1,
       autorestart: true,
       watch: false,
